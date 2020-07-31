@@ -1,6 +1,6 @@
 import React from 'react';
 import axios from 'axios'
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import apiUrl from '../apiConfig'
 
@@ -30,7 +30,7 @@ class MainCast extends React.Component {
         const { characters } = this.state
         const characterList = characters.map(character => (
             <div key= {character.id}>
-                {character.name}
+                <Link to={`/characterpage/${character.id}`}>{character.name}</Link>
             </div>
         ))
 

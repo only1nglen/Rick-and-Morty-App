@@ -3,9 +3,9 @@ import React from 'react'
 const Home = () => {
     return (
         <div>
-            <h4>Home test</h4>
+            <h4>Home</h4>
             <p>
-                nbgfvscbhjhjmhnefxcmvjmnfgbfvdc
+               content
             </p>
         </div>
     
