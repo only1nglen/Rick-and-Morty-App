@@ -1,23 +1,20 @@
-import React from 'react';
+import React, { Component } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
+
 import apiUrl from '../apiConfig'
 
-class MainCast extends React.Component {
+class MainCast extends Component {
     constructor() {
         super()
-
         this.state = {
             characters:[]
         }
     }
 
     componentDidMount() {
-        axios({
-            url: `${apiUrl}/character/1,2,3,4,5`,
-            method: 'get'
-        })
+        axios.get(`${apiUrl}/character/1,2,3,4,5`)
         // .then(res => console.log(res.data))
         .then(res => 
             this.setState ({
@@ -30,7 +27,7 @@ class MainCast extends React.Component {
         const { characters } = this.state
         const characterList = characters.map(character => (
             <div key= {character.id}>
-                <Link to={`/characterpage/${character.id}`}>{character.name}</Link>
+                <Link to={`/characterbio/${character.id}`}>{character.name}</Link>
             </div>
         ))
 
