@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import apiUrl from '../apiConfig'
 
@@ -29,28 +29,32 @@ class CharacterPage extends Component {
             name: res.data.name,
             status: res.data.status,
             img: res.data.image,
-            episodes: res.data.episode,
+            episodes: res.data.episode
         }))
         .catch(console.error)
     }
 
     
     render() {
-        const { name, status, img } = this.state
+        const { name, status, img, episodes } = this.state
 
-        // const epList = episodes.map(ep => (
-        //     <div key={ep.id}>
-        //             <Link to={`/episode/${ep.id}`}><li>{ep}</li></Link>
-        //     </div>
-        // ))
+        const getNum = /[^/]+$/
+        const clickEpi = episodes.map( (str, index) => (
+            {   
+                name: str, 
+                id: str.match(getNum)
+            }
+        ))
+        // console.log(clickEpi, "is clickepi")
+        
+        
+        const epList = clickEpi.map(ep => (
+            <div key={ep.id}>
+                    <Link to={`/episode/${ep.id}`}><li>Episode {ep.name.match(getNum)}</li></Link>
+            </div>
+        ))
 
-        // const epList = episodes.map(ep => (
-        //     <div key={ep}>
-        //             <li>{ep}</li>
-        //     </div>
-        // ))
-
-        // const epCount = episodes.length
+        const epCount = episodes.length
 
         return (
             <div>
@@ -60,12 +64,12 @@ class CharacterPage extends Component {
                 <br />
                     Status: {status}
                     <br />
-                    {/* Number of Episodes Appeared in: {epCount} */}
-                {/* <hr /> */}
-                    {/* List of Episode Appearance:
-                <ol>
+                    Number of Episodes Appeared in: {epCount}
+                <hr />
+                    List of Episode Appearance:
+                <ul>
                     {epList}
-                </ol> */}
+                </ul>
                 
             </div>
         );
