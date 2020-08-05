@@ -8,38 +8,39 @@ class EpisodeListing extends Component {
     constructor(){
         super()
         this.state = {
-            listing: [],
-            listing1:[]
+            allEpisodes:[]
         }
     }
 
-    componentDidMount() {
-        axios.all([ 
+   async componentDidMount() {
+        const [episodeResponsePageOne, episodeResponsePageTwo] = await axios.all([ 
             axios.get(`${apiUrl}/episode/?page=1`),
             axios.get(`${apiUrl}/episode/?page=2`)
         ])
-        .then(res => 
-            this.setState ({
-            listing: res[0].data.results,
-            listing1: res[1].data.results
-        }))
-        .catch(console.error)
+        // console.log(episodeResponsePageOne.data.results, episodeResponsePageTwo.data.results)
+        const episodePageOne = episodeResponsePageOne.data.results
+        const episodePageTwo = episodeResponsePageTwo.data.results
+        const allEpisodes = episodePageOne.concat(episodePageTwo)
+        // console.log(allEpisodes)
+        this.setState ({
+            allEpisodes
+        })
     }
 
     render(){
-        const { listing, listing1 } = this.state
+        const { allEpisodes } = this.state
 
-        const allEps = listing.concat(listing1)
-
-        const eplist = allEps.map(ep => (
-            <div key={ep.id}>
-                <Link to={`/episode/${ep.id}`}>{ep.name}</Link>
+        const episodeList = allEpisodes.map(episode => (
+            <div key={episode.id}>
+                <Link to={`/episode/${episode.id}`}>
+                    {episode.name}
+                </Link>
             </div>
         ))
 
         return(
             <div>
-                {eplist}
+                {episodeList}
             </div>
     )}
 }
