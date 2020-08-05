@@ -1,7 +1,7 @@
 let apiUrl
 const apiUrls = {
-  production: 'http://localhost:3000/',
-  development: 'https://rickandmortyapi.com/api/'
+  production: 'https://rickandmortyapi.com/api/',
+  development: 'http://localhost:3000'
 }
 
 if (window.location.hostname === 'localhost') {
