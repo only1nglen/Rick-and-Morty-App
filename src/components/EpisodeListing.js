@@ -9,9 +9,7 @@ class EpisodeListing extends Component {
         super()
         this.state = {
             listing: [],
-            listing1:[],
-            next:"",
-            prev:""
+            listing1:[]
         }
     }
 
@@ -20,26 +18,16 @@ class EpisodeListing extends Component {
             axios.get(`${apiUrl}/episode/?page=1`),
             axios.get(`${apiUrl}/episode/?page=2`)
         ])
-        // .then(res => console.log(res[0].data))
-        // .then(match => console.log(this.props))
         .then(res => 
             this.setState ({
             listing: res[0].data.results,
             listing1: res[1].data.results
-            // next: res.data.info.next,
-            // prev: res.data.info.prev
         }))
         .catch(console.error)
     }
 
     render(){
         const { listing, listing1 } = this.state
-
-        // const episodePageControl = (
-        //     <div>
-        //         <Link to={ { search:`/episode/?page=2`} }>{next}</Link>
-        //     </div>
-        // )
 
         const allEps = listing.concat(listing1)
 
@@ -51,8 +39,6 @@ class EpisodeListing extends Component {
 
         return(
             <div>
-                {/* {episodePageControl} */}
-                <br />
                 {eplist}
             </div>
     )}

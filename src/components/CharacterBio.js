@@ -15,42 +15,32 @@ class CharacterPage extends Component {
         }
     }
 
-    componentDidMount() {
-        // axios.all([
-        //     axios.get(`${apiUrl}character/${this.props.match.params.bro}`),
-        //     axios.get(`${apiUrl}/episode/?page=1`),
-        //     axios.get(`${apiUrl}/episode/?page=2`)
-        // ])
-        axios.get(`${apiUrl}character/${this.props.match.params.bro}`)
-        // .then(res => console.log(res.data))
-        // .then(match => console.log(this.props.match))
-        .then(res => 
-            this.setState ({
-            name: res.data.name,
-            status: res.data.status,
-            img: res.data.image,
-            episodes: res.data.episode
-        }))
-        .catch(console.error)
+    async componentDidMount() {
+        const characterResponse = await axios.get(`${apiUrl}character/${this.props.match.params.bro}`)
+        const singleCharacter = characterResponse.data
+        const episodeIdsString = singleCharacter.episode.map(episode => episode.substring(episode.lastIndexOf('/') + 1))
+        // console.log(episodeIdsString, 'string')
+        const listOfEpisodeValues = episodeIdsString.join()
+        // console.log(listOfEpisodeValues)
+        const episodeResponse = await axios.get(`${apiUrl}/episode/${listOfEpisodeValues}`)
+        const episodes = episodeResponse.data
+        // console.log(episodes, "episode")
+        this.setState ({
+            name: singleCharacter.name,
+            status: singleCharacter.status,
+            img: singleCharacter.image,
+            episodes
+        })
     }
 
-    
     render() {
-        const { name, status, img, episodes } = this.state
+        const { name, status, img, episodes} = this.state
 
-        const getNum = /[^/]+$/
-        const clickEpi = episodes.map( (str, index) => (
-            {   
-                name: str, 
-                id: str.match(getNum)
-            }
-        ))
-        // console.log(clickEpi, "is clickepi")
-        
-        
-        const epList = clickEpi.map(ep => (
+        const epList = episodes.map(ep => (
             <div key={ep.id}>
-                    <Link to={`/episode/${ep.id}`}><li>Episode {ep.name.match(getNum)}</li></Link>
+                    <Link to={`/episode/${ep.id}`}>
+                        <li>{ep.name}</li>
+                    </Link>
             </div>
         ))
 
@@ -58,19 +48,25 @@ class CharacterPage extends Component {
 
         return (
             <div>
-                <img src={img} alt="pic of character"></img>
-                <br />
-                    Name: {name}
-                <br />
-                    Status: {status}
-                    <br />
-                    Number of Episodes Appeared in: {epCount}
+                <div>
+                    <img src={img} alt="pic of character"></img>
+                </div>
+                    <div>
+                        Name: {name}
+                    </div>
+                    <div>
+                        Status: {status}
+                    </div>
+                    <div>
+                        Number of Episodes Appeared in: {epCount}
+                    </div>
                 <hr />
-                    List of Episode Appearance:
-                <ul>
-                    {epList}
-                </ul>
-                
+                    <div>
+                        List of Episode Appearance:
+                        <ul>
+                            {epList}
+                        </ul>
+                    </div>
             </div>
         );
     }
