@@ -25,7 +25,7 @@ class Episode extends Component {
         const listOfCharIdsValues = characterIdsString.join(',')
         // console.log(listOfCharIdsValues)
         // same as 'res'
-        const characterResponse = await axios.get(`${apiUrl}/character/${listOfCharIdsValues}`)
+        const characterResponse = await axios.get(`${apiUrl}character/${listOfCharIdsValues}`)
         const characters = characterResponse.data
         // console.log(characters, " chars")
         this.setState ({

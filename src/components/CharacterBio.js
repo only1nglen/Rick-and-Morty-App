@@ -18,18 +18,20 @@ class CharacterPage extends Component {
     async componentDidMount() {
         const characterResponse = await axios.get(`${apiUrl}character/${this.props.match.params.bro}`)
         const singleCharacter = characterResponse.data
+        // console.log(singleCharacter,"single char")
         const episodeIdsString = singleCharacter.episode.map(episode => episode.substring(episode.lastIndexOf('/') + 1))
         // console.log(episodeIdsString, 'string')
-        const listOfEpisodeValues = episodeIdsString.join()
-        // console.log(listOfEpisodeValues)
-        const episodeResponse = await axios.get(`${apiUrl}/episode/${listOfEpisodeValues}`)
+        const listOfEpisodeValues = episodeIdsString.join(',')
+        // console.log(listOfEpisodeValues, 'listOfEpisodeValues')
+        const episodeResponse = await axios.get(`${apiUrl}episode/${listOfEpisodeValues}`)
+        // console.log(episodeResponse,"episodeResponse")
         const episodes = episodeResponse.data
-        // console.log(episodes, "episode")
+        // console.log(episodes, "episodes")
         this.setState ({
             name: singleCharacter.name,
             status: singleCharacter.status,
             img: singleCharacter.image,
-            episodes
+            episodes: episodes
         })
     }
 
@@ -53,11 +55,9 @@ class CharacterPage extends Component {
                 </div>
                     <div>
                         Name: {name}
-                    </div>
-                    <div>
+                        <br />
                         Status: {status}
-                    </div>
-                    <div>
+                        <br />
                         Number of Episodes Appeared in: {epCount}
                     </div>
                 <hr />
