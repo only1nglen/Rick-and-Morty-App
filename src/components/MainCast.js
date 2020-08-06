@@ -13,14 +13,18 @@ class MainCast extends Component {
         }
     }
 
-    componentDidMount() {
-        axios.get(`${apiUrl}character/1,2,3,4,5`)
+    async componentDidMount() {
+        const characterResponse = await axios.get(`${apiUrl}character/1,2,3,4,5`)
+        const characters = characterResponse.data
+        this.setState ({
+            characters
+        })
         // .then(res => console.log(res.data))
-        .then(res => 
-            this.setState ({
-            characters: res.data
-        }))
-        .catch(console.error)
+        // .then(res => 
+        //     this.setState ({
+        //     characters: res.data
+        // }))
+        // .catch(console.error)
     }
 
     render() {
