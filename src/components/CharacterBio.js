@@ -26,12 +26,21 @@ class CharacterPage extends Component {
         const episodeResponse = await axios.get(`${apiUrl}episode/${listOfEpisodeValues}`)
         // console.log(episodeResponse,"episodeResponse")
         const episodes = episodeResponse.data
-        // console.log(episodes, "episodes")
+        const makeAnArray = function(episodes) {
+            let temporaryEpisodeList=[]
+            if(!Array.isArray(episodes)){
+                temporaryEpisodeList.push(episodes)
+                return temporaryEpisodeList
+            }else {
+                return episodes
+            }
+        }
+        const finalEpisodesList = makeAnArray(episodes)
         this.setState ({
             name: singleCharacter.name,
             status: singleCharacter.status,
             img: singleCharacter.image,
-            episodes: episodes
+            episodes: finalEpisodesList
         })
     }
 
