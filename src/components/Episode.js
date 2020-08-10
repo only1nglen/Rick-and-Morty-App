@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
+import EpisodeCard from './EpisodeCard'
 import apiUrl from '../apiConfig'
 
 class Episode extends Component {
@@ -52,15 +53,12 @@ class Episode extends Component {
 
         return (
             <div>
-                Episode name : {name}
-                <br />
-                    {episode}
-                <br />
-                    Air Date: {airdate}
-                <br />
-                <ul>
-                    Character Appearances: {charList}
-                </ul>
+                <EpisodeCard
+                    name={name}
+                    episode={episode}
+                    airdate={airdate}
+                    charList={charList}
+                />
             </div>
         )
     }
