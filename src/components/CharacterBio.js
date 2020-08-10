@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
+import CharacterCard from './CharacterCard'
 import apiUrl from '../apiConfig'
 
 class CharacterPage extends Component {
@@ -59,23 +60,13 @@ class CharacterPage extends Component {
 
         return (
             <div>
-                <div>
-                    <img src={img} alt="pic of character"></img>
-                </div>
-                    <div>
-                        Name: {name}
-                        <br />
-                        Status: {status}
-                        <br />
-                        Number of Episodes Appeared in: {epCount}
-                    </div>
-                <hr />
-                    <div>
-                        List of Episode Appearance:
-                        <ul>
-                            {epList}
-                        </ul>
-                    </div>
+                    <CharacterCard  
+                        img ={img} 
+                        name={name} 
+                        status={status} 
+                        epCount={epCount} 
+                        epList={epList}
+                    />
             </div>
         );
     }
