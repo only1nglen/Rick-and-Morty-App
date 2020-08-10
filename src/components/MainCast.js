@@ -19,12 +19,6 @@ class MainCast extends Component {
         this.setState ({
             characters
         })
-        // .then(res => console.log(res.data))
-        // .then(res => 
-        //     this.setState ({
-        //     characters: res.data
-        // }))
-        // .catch(console.error)
     }
 
     render() {
