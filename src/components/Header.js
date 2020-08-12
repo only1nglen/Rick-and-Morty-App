@@ -12,6 +12,7 @@ const Header = () => (
         <Nav>
             <Nav.Link href="#maincast">Main Cast</Nav.Link>
             <Nav.Link href="#episodelisting">Episode Guide</Nav.Link>
+            <Nav.Link href="#search">Character Search</Nav.Link>
         </Nav>
     </Navbar>
 )
