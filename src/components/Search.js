@@ -1,10 +1,10 @@
 import React,  { Component }  from 'react'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 
 import apiUrl from '../apiConfig'
 import SearchForm from './SearchForm'
-// import SearchResultCard from './SearchResultCard'
+import SearchResultCard from './SearchResultCard'
 
 
 class SearchBar extends Component {
@@ -31,7 +31,7 @@ class SearchBar extends Component {
             event.preventDefault()
 
             const characterResponse = await axios.get(`${apiUrl}character/?page=1&name=${this.state.searched.query}`)
-            // console.log(characterResponse.data)
+            // console.log(characterResponse.data.results)
 
             this.setState ({
                 character: characterResponse.data.results,
@@ -40,13 +40,16 @@ class SearchBar extends Component {
         }
 
         render() {
+
+            const { character} = this.state
+            const { onChange, onSubmit } = this
+
             return (
             <div>
                 <SearchForm  
-                    character={this.state.character}
-                    onChange={this.onChange}
-                    onSubmit={this.onSubmit} 
-                />
+                    character={character}
+                    onChange={onChange}
+                    onSubmit={onSubmit} />
 
                 {/* <div>
                     <div style={{display: !this.state.info.count && "none"}}>{this.state.info.count} Results</div>
@@ -55,27 +58,11 @@ class SearchBar extends Component {
                     <div style={{display: !this.state.info.count && "none"}}>{this.state.info.prev}</div>
                 </div> */}
 
-                {/* <SearchResultCard  
-
-                /> */}
-
-                <div>
-                    {this.state.character.map(character => (
-                        <div className="result-card" key={character.id}>
-                            <Link to={`/characterbio/${character.id}`}>
-                                <img className="img-result" src={character.image} alt={character.name}></img>
-                            </Link> 
-                            <div>Name: {character.name}</div>
-                            <div>Status: {character.status}</div>
-                        </div>
-                    ))}
-                </div>
+                <SearchResultCard character={character} />
 
             </div>
-                
             )
         }
-        
 }
 
 export default SearchBar
