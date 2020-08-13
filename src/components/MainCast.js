@@ -40,4 +40,4 @@ class MainCast extends Component {
     }
 }
 
-export default MainCast;
+export default MainCast

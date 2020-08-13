@@ -21,6 +21,7 @@ class App extends Component {
           <Route path="/episodelisting" component={EpisodeListing} />
           <Route path="/episode/:sis"  component={Episode} />
           <Route path="/search"  component={Search} />
+          {/* <Route path="/searchresult/:dad"  component={Search} /> */}
         </div>
     )
   }
