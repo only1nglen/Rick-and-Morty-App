@@ -1,10 +1,11 @@
 import React,  { Component }  from 'react'
 import axios from 'axios'
-// import { Link } from 'react-router-dom'
+// import { Redirect, Link } from 'react-router-dom'
 
 import apiUrl from '../apiConfig'
 import SearchForm from './SearchForm'
 import SearchResultCard from './SearchResultCard'
+// import SearchResult from './SearchResult'
 
 
 class SearchBar extends Component {
@@ -15,34 +16,80 @@ class SearchBar extends Component {
                     query: ''
                 },
                     character:[],
-                    info:[]
+                    info:[],
+                    gotNoResults: false
             }
         }
 
         onChange = event => {
             const updatedField = { [event.target.name]: event.target.value }
-
             const searchInput = Object.assign(this.state.searched, updatedField)
-        
-            this.setState({ search: searchInput })
+            this.setState({ searched: searchInput })
         }
 
-        onSubmit = async event => {
+        // onSubmit = async event => {
+        //     event.preventDefault()
+
+        //     try {
+        //         const characterResponse = await axios.get(`${apiUrl}character/?page=1&name=${this.state.searched.query}`)
+        //         // console.log(characterResponse.data.results)
+
+        //         this.setState ({
+        //             character: characterResponse.data.results,
+        //             info: characterResponse.data.info
+        //         })
+        //     } catch {
+        //         this.setState ({
+        //           gotNoResults: true
+        //        })
+        //     }
+
+        // }
+        
+        onSubmit = event => {
             event.preventDefault()
 
-            const characterResponse = await axios.get(`${apiUrl}character/?page=1&name=${this.state.searched.query}`)
-            // console.log(characterResponse.data.results)
-
-            this.setState ({
-                character: characterResponse.data.results,
-                info: characterResponse.data.info
+            if(this.state.searched.query) {
+                axios({
+                url: `${apiUrl}character/?page=1&name=${this.state.searched.query}`,
+                method: 'GET'
             })
+                .then(res => this.setState({
+                character: res.data.results,
+                info: res.data.info,
+                gotNoResults: false
+            }))
+            .catch(err => console.log(err, "Try Again, Jerry"))
+            .catch(this.setState ({
+                gotNoResults: true,
+            })
+            )
+            } else {
+                this.setState ({
+                    gotNoResults: true,
+                })
+            }
         }
 
         render() {
 
-            const { character} = this.state
+            const { character } = this.state
             const { onChange, onSubmit } = this
+
+            if (this.state.gotNoResults) {
+                // console.log(this.state.gotNoResults)
+                return  <div>
+                            <SearchForm  
+                                character={character}
+                                onChange={onChange}
+                                onSubmit={onSubmit} />
+                            <div>No Results</div>
+                        </div>
+            }
+
+            // if (this.state.searchPreformed) {
+            //     return <Redirect to={"searchresult/1"} />
+            // }
 
             return (
             <div>
@@ -59,6 +106,8 @@ class SearchBar extends Component {
                 </div> */}
 
                 <SearchResultCard character={character} />
+
+                {/* <SearchResult character={character} /> */}
 
             </div>
             )
