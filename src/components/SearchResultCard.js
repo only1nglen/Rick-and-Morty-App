@@ -1,21 +1,27 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Card from 'react-bootstrap/Card'
+import Button from 'react-bootstrap/Button'
 
 function SearchResultCard (props) {
     // console.log(props, "from result card")
 
     const results = props.character.map(character => (
-        <div className="result-card" key={character.id}>
-            <Link to={`/characterbio/${character.id}`}>
-                <img className="img-result" src={character.image} alt={character.name}></img>
-            </Link> 
-            <div>Name: {character.name}</div>
-            <div>Status: {character.status}</div>
+        <div key={character.id}>
+            <Card className="char-card" style={{ width: '14rem' }}>
+                    <Card.Img variant="top" src={character.image} />
+                    <Card.Body>
+                        <Card.Title>{character.name}</Card.Title>
+                        <Button variant="outline-success">
+                            <Link to={`/characterbio/${character.id}`}>More Info</Link>
+                        </Button>
+                    </Card.Body>
+                </Card>
         </div>
     ))
     
     return (
-        <div>
+        <div className='result-container'>
             {results}
         </div>
     )

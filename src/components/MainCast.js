@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 
-
+import Card from 'react-bootstrap/Card'
+import Button from 'react-bootstrap/Button'
 import apiUrl from '../apiConfig'
 
 class MainCast extends Component {
@@ -25,14 +26,22 @@ class MainCast extends Component {
         const { characters } = this.state
         const characterList = characters.map(character => (
             <div key= {character.id}>
-                <Link to={`/characterbio/${character.id}`}>{character.name}</Link>
+                <Card className="char-card" style={{ width: '14rem' }}>
+                    <Card.Img variant="top" src={character.image} />
+                    <Card.Body>
+                        <Card.Title>{character.name}</Card.Title>
+                        <Button variant="outline-success">
+                            <Link to={`/characterbio/${character.id}`}>More Info</Link>
+                        </Button>
+                    </Card.Body>
+                </Card>
             </div>
         ))
 
         return (
             <div>
-                <h4>The Family </h4>
-                <div>
+                <h1 className="main-cast-title">The Family </h1>
+                <div className="main-cast">
                     {characterList}
                 </div>
             </div>

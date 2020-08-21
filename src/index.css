@@ -35,36 +35,38 @@ a:visited {
   margin: auto;
 }
 
-/*  Nav */
-/* .nav-container {
+/* All Character Cards */
+.char-card {
+  background-color: black;
+  border: solid 1px green;
+  margin: 5px;
+}
+
+/* Main cast component */
+.main-cast-title {
+  text-align: center;
+}
+
+.main-cast {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-wrap: wrap;
   justify-content: center;
-  border: 1px solid red;
-  margin: 20px auto;
-  max-width: fit-content;
-} */
+}
 
-/* .my-row{
+/* SearchCardResult Component */
+.result-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* SearchForm Component */
+.search-bar {
   display: flex;
   justify-content: center;
-  border: 1px solid red;
-} */
+}
 
-/* .my-col {
-  border: 1px solid red;
-} */
+.search-response {
+  text-align: center;
+}
 
-/* .title-line {
-  align-content: center;
-  border: 1px solid red;
-} */
-
-/* .nav-links{
-  align-self: center;
-  align-content: space-between;
-  border: 1px solid red;
-} */
-
-/* Nav */

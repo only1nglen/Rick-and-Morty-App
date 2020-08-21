@@ -73,19 +73,8 @@ class SearchBar extends Component {
 
         render() {
 
-            const { character } = this.state
+            const { character, searched } = this.state
             const { onChange, onSubmit } = this
-
-            if (this.state.gotNoResults) {
-                // console.log(this.state.gotNoResults)
-                return  <div>
-                            <SearchForm  
-                                character={character}
-                                onChange={onChange}
-                                onSubmit={onSubmit} />
-                            <div>No Results</div>
-                        </div>
-            }
 
             // if (this.state.searchPreformed) {
             //     return <Redirect to={"searchresult/1"} />
@@ -93,10 +82,14 @@ class SearchBar extends Component {
 
             return (
             <div>
-                <SearchForm  
+                <div>
+                    <SearchForm
                     character={character}
+                    searched={searched}
+                    gotNoResults={this.state.gotNoResults}
                     onChange={onChange}
                     onSubmit={onSubmit} />
+                </div>
 
                 {/* <div>
                     <div style={{display: !this.state.info.count && "none"}}>{this.state.info.count} Results</div>
