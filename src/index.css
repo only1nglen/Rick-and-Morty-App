@@ -70,3 +70,13 @@ a:visited {
   text-align: center;
 }
 
+/* EpisodeListing */
+.table-container {
+  margin-bottom: 30px;
+}
+
+.episode-table {
+  margin: auto;
+  text-align: center;
+  width: 75vw;
+}

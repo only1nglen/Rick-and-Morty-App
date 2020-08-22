@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import Table from 'react-bootstrap/Table'
 
 import apiUrl from './../apiConfig'
 
@@ -30,17 +31,41 @@ class EpisodeListing extends Component {
     render(){
         const { allEpisodes } = this.state
 
+        // const episodeList = allEpisodes.map(episode => (
+        //     <div key={episode.id}>
+        //         <Link to={`/episode/${episode.id}`}>
+        //             {episode.name}
+        //         </Link>
+        //     </div>
+        // ))
+
         const episodeList = allEpisodes.map(episode => (
-            <div key={episode.id}>
-                <Link to={`/episode/${episode.id}`}>
-                    {episode.name}
-                </Link>
-            </div>
+            <tr key={episode.id}>
+                    <td>{episode.id}</td>
+                    <td>
+                        <Link to={`/episode/${episode.id}`}>
+                            {episode.name}
+                        </Link>
+                    </td>
+            </tr>
         ))
 
         return(
-            <div>
-                {episodeList}
+            <div className="table-container">
+                <Table striped bordered hover 
+                        size="sm" 
+                        variant="dark"
+                        className="episode-table" >
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Title</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {episodeList}
+                    </tbody>
+                </Table>
             </div>
     )}
 }
