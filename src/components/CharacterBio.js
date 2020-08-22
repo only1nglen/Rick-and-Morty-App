@@ -9,9 +9,7 @@ class CharacterPage extends Component {
     constructor() {
         super()
         this.state = {
-            name:"",
-            status:"",
-            img:"",
+            character:"",
             episodes: []
         }
     }
@@ -38,35 +36,33 @@ class CharacterPage extends Component {
         }
         const finalEpisodesList = makeAnArray(episodes)
         this.setState ({
-            name: singleCharacter.name,
-            status: singleCharacter.status,
-            img: singleCharacter.image,
-            episodes: finalEpisodesList
+            episodes: finalEpisodesList,
+            character: singleCharacter
         })
     }
 
     render() {
-        const { name, status, img, episodes} = this.state
+        const { character, episodes} = this.state
 
         const epList = episodes.map(ep => (
-            <div key={ep.id}>
+            <tr key={ep.id}>
+                <td>
                     <Link to={`/episode/${ep.id}`}>
-                        <li>{ep.name}</li>
+                    {ep.name}
                     </Link>
-            </div>
+                </td>
+            </tr>
         ))
-
+        
         const epCount = episodes.length
 
         return (
             <div>
-                    <CharacterCard  
-                        img ={img} 
-                        name={name} 
-                        status={status} 
-                        epCount={epCount} 
-                        epList={epList}
-                    />
+                <CharacterCard  
+                    character={character}
+                    epCount={epCount} 
+                    epList={epList}
+                />
             </div>
         );
     }

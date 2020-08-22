@@ -80,3 +80,16 @@ a:visited {
   text-align: center;
   width: 75vw;
 }
+
+/* Character Bio */
+.char-bio-page{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.episode-accordion{
+  background-color: #252426;
+  margin: 30px;
+  text-align: center;
+}
