@@ -93,3 +93,29 @@ a:visited {
   margin: 30px;
   text-align: center;
 }
+
+/* Episode Component */
+.cast-image{
+  height: 100px;
+  width: 100px;
+  margin: 5px;
+}
+
+ /* Episode Card */
+.episode-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cast-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cast-box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}

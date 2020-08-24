@@ -17,7 +17,6 @@ class Episode extends Component {
     }
 
     async componentDidMount() {
-        // same as 'res'
         const episodeResponse = await axios.get(`${apiUrl}episode/${this.props.match.params.sis}`)
         // console.log(episodeResponse)
         const singleEpisode = episodeResponse.data
@@ -25,7 +24,6 @@ class Episode extends Component {
         // console.log(characterIdsString)
         const listOfCharIdsValues = characterIdsString.join(',')
         // console.log(listOfCharIdsValues)
-        // same as 'res'
         const characterResponse = await axios.get(`${apiUrl}character/${listOfCharIdsValues}`)
         const characters = characterResponse.data
         // console.log(characters, " chars")
@@ -43,10 +41,8 @@ class Episode extends Component {
         const charList = characters.map(character => (
             <div key={character.id}>
                     <Link to={`/characterbio/${character.id}`}>
-                        <li>
-                            {/* <img src={character.image} alt={character.name}/>{character.name} */}
-                            {character.name}
-                        </li>
+                            <img className='cast-image' src={character.image} alt={character.name}/>
+                            {/* {character.name} */}
                     </Link>
             </div>
         ))

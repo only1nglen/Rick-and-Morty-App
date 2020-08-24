@@ -3,9 +3,9 @@ import axios from 'axios'
 import { Link } from 'react-router-dom'
 import Table from 'react-bootstrap/Table'
 
-import apiUrl from './../apiConfig'
+import apiUrl from '../apiConfig'
 
-class EpisodeListing extends Component {
+class EpisodeGuide extends Component {
     constructor(){
         super()
         this.state = {
@@ -14,14 +14,18 @@ class EpisodeListing extends Component {
     }
 
    async componentDidMount() {
-        const [episodeResponsePageOne, episodeResponsePageTwo] = await axios.all([ 
+        const [episodeResponsePageOne, episodeResponsePageTwo, episodeResponsePageThree] = await axios.all([ 
             axios.get(`${apiUrl}/episode/?page=1`),
-            axios.get(`${apiUrl}/episode/?page=2`)
+            axios.get(`${apiUrl}/episode/?page=2`),
+            axios.get(`${apiUrl}/episode/?page=3`)
         ])
-        // console.log(episodeResponsePageOne.data.results, episodeResponsePageTwo.data.results)
         const episodePageOne = episodeResponsePageOne.data.results
+        // console.log(episodePageOne)
         const episodePageTwo = episodeResponsePageTwo.data.results
-        const allEpisodes = episodePageOne.concat(episodePageTwo)
+        // console.log(episodePageTwo)
+        const episodePageThree = episodeResponsePageThree.data.results
+        // console.log(episodePageThree)
+        const allEpisodes = [...episodePageOne, ...episodePageTwo, ...episodePageThree]
         // console.log(allEpisodes)
         this.setState ({
             allEpisodes
@@ -31,22 +35,14 @@ class EpisodeListing extends Component {
     render(){
         const { allEpisodes } = this.state
 
-        // const episodeList = allEpisodes.map(episode => (
-        //     <div key={episode.id}>
-        //         <Link to={`/episode/${episode.id}`}>
-        //             {episode.name}
-        //         </Link>
-        //     </div>
-        // ))
-
         const episodeList = allEpisodes.map(episode => (
             <tr key={episode.id}>
-                    <td>{episode.id}</td>
-                    <td>
-                        <Link to={`/episode/${episode.id}`}>
-                            {episode.name}
-                        </Link>
-                    </td>
+                <td>{episode.id}</td>
+                <td>
+                    <Link to={`/episode/${episode.id}`}>
+                        {episode.name}
+                    </Link>
+                </td>
             </tr>
         ))
 
@@ -59,7 +55,7 @@ class EpisodeListing extends Component {
                     <thead>
                         <tr>
                             <th>#</th>
-                            <th>Title</th>
+                            <th><h5>Title</h5></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -70,4 +66,4 @@ class EpisodeListing extends Component {
     )}
 }
 
-export default EpisodeListing
+export default EpisodeGuide
