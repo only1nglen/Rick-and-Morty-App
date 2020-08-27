@@ -9,26 +9,28 @@ class EpisodeGuide extends Component {
     constructor(){
         super()
         this.state = {
+            totalPages:'',
             allEpisodes:[]
         }
     }
 
-   async componentDidMount() {
-        const [episodeResponsePageOne, episodeResponsePageTwo, episodeResponsePageThree] = await axios.all([ 
-            axios.get(`${apiUrl}/episode/?page=1`),
-            axios.get(`${apiUrl}/episode/?page=2`),
-            axios.get(`${apiUrl}/episode/?page=3`)
-        ])
-        const episodePageOne = episodeResponsePageOne.data.results
-        // console.log(episodePageOne)
-        const episodePageTwo = episodeResponsePageTwo.data.results
-        // console.log(episodePageTwo)
-        const episodePageThree = episodeResponsePageThree.data.results
-        // console.log(episodePageThree)
-        const allEpisodes = [...episodePageOne, ...episodePageTwo, ...episodePageThree]
-        // console.log(allEpisodes)
+    async componentDidMount() {
+        const getTotalPages = await axios.get(`${apiUrl}/episode`)
+        const totalPages = getTotalPages.data.info.pages
+
+        let pageNum = 0
+        let allEpisodes = []
+        do {
+            pageNum++
+            let episodeCall = await axios.get(`${apiUrl}/episode/?page=${pageNum}`)
+            let episodeData = episodeCall.data.results
+            allEpisodes.push(...episodeData)
+        }
+        while (pageNum < `${totalPages}`)
+
         this.setState ({
-            allEpisodes
+            allEpisodes,
+            totalPages
         })
     }
 
