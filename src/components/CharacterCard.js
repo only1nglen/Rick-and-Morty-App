@@ -19,7 +19,7 @@ function CharacterCard(props) {
             <Accordion>
                 <Card className="episode-accordion">
                     <Accordion.Toggle as={Card.Header} eventKey="0">
-                        <div>{props.epCount} Episode Appearances</div>
+                        <div className="ep-appearance-list-title">{props.epCount} Episode Appearances</div>
                     </Accordion.Toggle>
                     <Accordion.Collapse eventKey="0">
                         <Card.Body variant="dark">

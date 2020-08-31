@@ -52,6 +52,10 @@ a:visited {
   text-decoration: underline;
 }
 
+.ep-appearance-list-title{
+  cursor: pointer;
+}
+
 /* Main cast component */
 .main-cast-title {
   text-align: center;
