@@ -9,7 +9,7 @@ class CharacterPage extends Component {
     constructor() {
         super()
         this.state = {
-            character:"",
+            character: null,
             episodes: []
         }
     }
@@ -58,14 +58,14 @@ class CharacterPage extends Component {
 
         return (
             <div>
-                <CharacterCard  
+                {character && <CharacterCard  
                     character={character}
                     epCount={epCount} 
                     epList={epList}
-                />
+                />}
             </div>
-        );
+        )
     }
 }
 
-export default CharacterPage;
+export default CharacterPage

@@ -12,7 +12,7 @@ const SearchForm = (props) => (
                 className="input mb-2 mr-sm-2"
                 type="text" 
                 name="query"
-                placeholder="enter name.." 
+                placeholder="Search by Name.." 
                 value={props.query}
                 onChange={props.onChange}
             />

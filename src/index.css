@@ -6,7 +6,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: black;
-  color:yellow;
+  color:#80CFA9;
+  font-family: 'Overpass', sans-serif;
 }
 
 code {
@@ -40,6 +41,15 @@ a:visited {
   background-color: black;
   border: solid 1px green;
   margin: 5px;
+}
+
+.char-card-name{
+  color: #F9DC5C;
+}
+
+.character-card-label {
+  color: #FFDBB5;
+  text-decoration: underline;
 }
 
 /* Main cast component */

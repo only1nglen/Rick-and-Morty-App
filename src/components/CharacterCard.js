@@ -9,9 +9,10 @@ function CharacterCard(props) {
             <Card className="char-card" style={{ width: '16rem' }}>
                 <Card.Img variant="top" src={props.character.image} />
                 <Card.Body>
-                    <Card.Title>{props.character.name}</Card.Title>
-                    <div>Gender: {props.character.gender}</div>
-                    <div>Status: {props.character.status}</div>
+                    <Card.Title className="char-card-name">{props.character.name}</Card.Title>
+                    <div><span className="character-card-label">Gender</span>: {props.character.gender}</div>
+                    <div><span className="character-card-label">Status</span>: {props.character.status}</div>
+                    <div><span className="character-card-label">Location</span>: {props.character.location.name}</div>
                 </Card.Body>
             </Card>
 
