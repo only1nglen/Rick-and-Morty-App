@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-
 import Card from 'react-bootstrap/Card'
-import Button from 'react-bootstrap/Button'
+// import Button from 'react-bootstrap/Button'
+
 import apiUrl from '../apiConfig'
 
 class MainCast extends Component {
@@ -27,12 +27,14 @@ class MainCast extends Component {
         const characterList = characters.map(character => (
             <div key= {character.id}>
                 <Card className="char-card" style={{ width: '14rem' }}>
-                    <Card.Img variant="top" src={character.image} />
+                    <Link to={`/characterbio/${character.id}`}>
+                        <Card.Img variant="top" src={character.image} />
+                    </Link>
                     <Card.Body>
-                        <Card.Title>{character.name}</Card.Title>
-                        <Button variant="outline-success">
+                        <Card.Title className="main-cast-title-card">{character.name}</Card.Title>
+                        {/* <Button variant="outline-success">
                             <Link to={`/characterbio/${character.id}`}>More Info</Link>
-                        </Button>
+                        </Button> */}
                     </Card.Body>
                 </Card>
             </div>

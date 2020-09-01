@@ -1,6 +1,5 @@
 import React,  { Component }  from 'react'
 import axios from 'axios'
-// import { Redirect, Link } from 'react-router-dom'
 
 import apiUrl from '../apiConfig'
 import SearchForm from './SearchForm'
@@ -27,12 +26,12 @@ class SearchBar extends Component {
         onSubmit = async event => {
             event.preventDefault()
 
+            let pageNum = 0
+            let character = []
+
             try {
                 const getTotalPages = await axios.get(`${apiUrl}/character/?name=${this.state.searched.query}`)
                 const totalPages = getTotalPages.data.info.pages
-
-                let pageNum = 0
-                let character = []
 
                 while (this.state.searched.query && pageNum < `${totalPages}`) {
                     pageNum++

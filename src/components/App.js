@@ -8,7 +8,6 @@ import CharacterBio from './CharacterBio'
 import Episode from './Episode'
 import EpisodeGuide from './EpisodeGuide'
 import Search from './Search'
-// import SearchResult from './SearchResult'
 
 class App extends Component {
   render() {
@@ -22,7 +21,6 @@ class App extends Component {
           <Route path="/episodeguide" component={EpisodeGuide} />
           <Route path="/episode/:sis"  component={Episode} />
           <Route path="/search"  component={Search} />
-          {/* <Route path="/searchresult/:dad"  component={SearchResult} /> */}
         </div>
     )
   }

@@ -11,7 +11,6 @@ function EpisodeCard(props){
                 <div><h4>Cast</h4></div> 
                 <div className="cast-box">{props.charList}</div>
             </div>
-           
         </div>       
     )
 }

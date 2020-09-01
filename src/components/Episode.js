@@ -42,7 +42,6 @@ class Episode extends Component {
             <div key={character.id}>
                     <Link to={`/characterbio/${character.id}`}>
                             <img className='cast-image' src={character.image} alt={character.name}/>
-                            {/* {character.name} */}
                     </Link>
             </div>
         ))

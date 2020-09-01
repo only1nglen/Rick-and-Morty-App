@@ -35,7 +35,6 @@ function CharacterCard(props) {
                 </Card>
             </Accordion>
         </div>
-
     )
 }
 
