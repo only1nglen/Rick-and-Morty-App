@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
 import Card from 'react-bootstrap/Card'
-// import Button from 'react-bootstrap/Button'
 
 import apiUrl from '../apiConfig'
 
@@ -32,9 +31,6 @@ class MainCast extends Component {
                     </Link>
                     <Card.Body>
                         <Card.Title className="main-cast-title-card">{character.name}</Card.Title>
-                        {/* <Button variant="outline-success">
-                            <Link to={`/characterbio/${character.id}`}>More Info</Link>
-                        </Button> */}
                     </Card.Body>
                 </Card>
             </div>
