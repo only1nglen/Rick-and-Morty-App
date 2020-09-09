@@ -17,9 +17,9 @@ class App extends Component {
           <hr />
           <Route exact path="/" component={Home} />
           <Route path="/maincast" component={MainCast} />
-          <Route path="/characterbio/:bro" component={CharacterBio} />
+          <Route path="/characterbio/:id" component={CharacterBio} />
           <Route path="/episodeguide" component={EpisodeGuide} />
-          <Route path="/episode/:sis"  component={Episode} />
+          <Route path="/episode/:id"  component={Episode} />
           <Route path="/search"  component={Search} />
         </div>
     )

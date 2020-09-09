@@ -17,7 +17,7 @@ class Episode extends Component {
     }
 
     async componentDidMount() {
-        const episodeResponse = await axios.get(`${apiUrl}episode/${this.props.match.params.sis}`)
+        const episodeResponse = await axios.get(`${apiUrl}episode/${this.props.match.params.id}`)
         // console.log(episodeResponse)
         const singleEpisode = episodeResponse.data
         const characterIdsString = singleEpisode.characters.map(character => character.substring(character.lastIndexOf('/') + 1))
