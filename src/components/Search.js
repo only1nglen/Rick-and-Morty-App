@@ -29,25 +29,32 @@ class SearchBar extends Component {
             let pageNum = 0
             let character = []
 
-            try {
-                const getTotalPages = await axios.get(`${apiUrl}/character/?name=${this.state.searched.query}`)
-                const totalPages = getTotalPages.data.info.pages
+            if (this.state.searched.query.trim() === '' ){
+                this.setState ({
+                    gotNoResults: true,
+                    character:[]
+                })
+            } else {
+                    try {
+                    const getTotalPages = await axios.get(`${apiUrl}/character/?name=${this.state.searched.query}`)
+                    const totalPages = getTotalPages.data.info.pages
 
-                while (this.state.searched.query && pageNum < `${totalPages}`) {
-                    pageNum++
-                    const charResponse = await axios.get(`${apiUrl}character/?page=${pageNum}&name=${this.state.searched.query}`)
-                    character.push(...charResponse.data.results)
-                        this.setState({
-                        character,
-                        info: charResponse.data.info,
-                        gotNoResults: false
-                    })
+                    while (this.state.searched.query && pageNum < `${totalPages}`) {
+                        pageNum++
+                        const charResponse = await axios.get(`${apiUrl}character/?page=${pageNum}&name=${this.state.searched.query}`)
+                        character.push(...charResponse.data.results)
+                            this.setState({
+                            character,
+                            info: charResponse.data.info,
+                            gotNoResults: false
+                        })
+                    }
+                } catch {
+                        this.setState ({
+                            gotNoResults: true,
+                            character:[]
+                        })
                 }
-            } catch {
-                    this.setState ({
-                        gotNoResults: true,
-                        character:[]
-                    })
             }
         }
 
